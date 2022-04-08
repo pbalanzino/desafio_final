@@ -1,36 +1,12 @@
+import idGenerator from '../tools/idGenerator.js';
+
 export default class Products{
-    constructor(){
+    constructor(id, timestamp, title, description, code, thumbnail, price, stock){
         this.products = [];
+        this.id = idGenerator();
+        this.timestamp = Date.now();
     }
-    get = () => {
-        try{
-            return await this.products;
-        } catch (error){
-            console.log({Error: error})
-    }
-    post = async(product) => {
-        try{
-            this.products.push(product);
-        } catch (error){
-            console.log({Error: error})
-        }
-    }
-    put = async(product) => {
-        try{
-            this.products.push(product);
-        } catch (error){
-            console.log({Error: error})
-        }
-    }
-    
-    _delete = async(pid) => {
-        try{
-            this.products.push(pid);
-        } catch (error){
-            console.log({Error: error})
-        }
-    }
-}};
+};
 
 /* 
 
