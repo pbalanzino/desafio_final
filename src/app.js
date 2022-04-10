@@ -10,7 +10,8 @@ const server = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/api/products', productsRouter);
-app.use('/api/carts', cartsRouter);
+app
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use('/api/products', productsRouter)
+  .use('/api/carts', cartsRouter);
