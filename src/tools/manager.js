@@ -1,5 +1,6 @@
 import fs from 'fs';
-
+import idGenerator from './idGenerator.js';
+import Product from './src/classes/product.js';
 const p = './src/model/products.json';
 
 export default class Manager{
@@ -21,16 +22,31 @@ export default class Manager{
         try{
             let file = await fs.promises.readFile(this.path, 'utf-8',);
             let fileParsed = JSON.parse(file);
-            const content = {
-                title: product.title,
-                price: product.price,
-                thumbnail: product.thumbnail,
-                id: fileParsed.length + 1
-               }
-            fileParsed.push(content);
+            const newProduct = new Product(product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
+            // const newProduct = {
+            //     id: idGenerator.next().value,
+            //     timestamp: Date.now(),
+            //     title: product.title,
+            //     price: product.price,
+            //     thumbnail: product.thumbnail
+            //    }
+            fileParsed.push(newProduct);
             await fs.promises.writeFile(this.path, JSON.stringify(fileParsed,null,'\t'));
         }catch (err){
-            console.log(`No se pudo guardar el archivo: ${err}`);
+            console.log(`{ error: ${err} }`);
+        }
+    }
+
+    async update(id){
+        try{
+            let file = await fs.promises.readFile(this.path, 'utf-8',);
+            let fileParsed = JSON.parse(file);
+            const product = fileParsed[id];
+            const updatedProduct = (product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
+            fileParsed.push(updatedProduct);
+            await fs.promises.writeFile(this.path, JSON.stringify(fileParsed,null,'\t'));
+        }catch (err){
+            console.log(`{ error: ${err} }`);
         }
     }
 
@@ -38,10 +54,7 @@ export default class Manager{
         try{
             await fs.promises.unlink(this.path);
         } catch (err) {
-            console.log(`No se pudo borrar el archivo. ${err}`);
+            console.log(`{ error: ${err} }`);
         }
     }
 };
-
-const manager = new Manager(p);
-manager.read(p);
