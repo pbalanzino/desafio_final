@@ -4,7 +4,6 @@ import Cart from '../classes/cart.class.js';
 
 export default class Manager{
     
-    static pathProduct = `../model/products.json`;
     static pathCart = './src/model/carts.json';
     
     static async read(path){
@@ -23,17 +22,6 @@ export default class Manager{
             console.log(`{ error: ${err} }`);
         }
     }
-  /*   static async save(product, path){
-        try{
-            let file = await fs.promises.readFile(path, 'utf-8',);
-            let fileParsed = JSON.parse(file);
-            const newProduct = new Product(product.id = fileParsed.length + 1, product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
-            fileParsed.push(newProduct);
-            await fs.promises.writeFile(path, JSON.stringify(fileParsed,null,'\t'));
-        }catch (err){
-            console.log(`{ error: ${err} }`);
-        }
-    } */
 
     static async deleteAll(path){
         try{
@@ -43,23 +31,3 @@ export default class Manager{
         }
     }
 };
-
-/* 
-
-// if(!fs.existsSync(this.path)) await fs.promises.writeFile(this.path, '[]');
-
-// const newProduct = {
-    //     id: idGenerator.next().value,
-    //     timestamp: Date.now(),
-    //     title: product.title,
-    //     price: product.price,
-    //     thumbnail: product.thumbnail
-//    }
-
-// let newContent = fileParsed.forEach(product => {
-            //     if(product.id == id) {
-            //         fileParsed.splice(product[id], 1);
-            //     }
-            // });
-
-*/
