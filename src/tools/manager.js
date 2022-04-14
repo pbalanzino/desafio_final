@@ -1,62 +1,43 @@
 import fs from 'fs';
 import Product from '../classes/product.class.js';
 import Cart from '../classes/cart.class.js';
-// const p = './src/model/model.json';
-// const p = '../model/model.json';
+
 export default class Manager{
     
-    static pathProduct = './src/model/model.json';
-    static pathCart = './src/model/cart.json';
+    static pathProduct = `../model/products.json`;
+    static pathCart = './src/model/carts.json';
     
-    static async read(){
+    static async read(path){
         try {
-            let file = await fs.promises.readFile(this.path, 'utf-8');
-            return file;
-        } catch (err){
+            let file = await fs.promises.readFile(path, 'utf-8');
+            return JSON.parse(file);
+    } catch (err) {
             console.log(`{ error: ${err} }`);
         }
     }
 
-    static async save(product){
+    static async save(path, element){
         try{
-            let file = await fs.promises.readFile(this.path, 'utf-8',);
+            await fs.promises.writeFile(path, JSON.stringify(element), null, '\t');
+        }catch (err){
+            console.log(`{ error: ${err} }`);
+        }
+    }
+  /*   static async save(product, path){
+        try{
+            let file = await fs.promises.readFile(path, 'utf-8',);
             let fileParsed = JSON.parse(file);
             const newProduct = new Product(product.id = fileParsed.length + 1, product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
             fileParsed.push(newProduct);
-            await fs.promises.writeFile(this.path, JSON.stringify(fileParsed,null,'\t'));
+            await fs.promises.writeFile(path, JSON.stringify(fileParsed,null,'\t'));
         }catch (err){
             console.log(`{ error: ${err} }`);
         }
-    }
+    } */
 
-    static async update(id){
+    static async deleteAll(path){
         try{
-            let file = await fs.promises.readFile(this.path, 'utf-8',);
-            let fileParsed = JSON.parse(file);
-            let product = fileParsed[id];
-            let updatedProduct = (product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
-            fileParsed.push(updatedProduct);
-            await fs.promises.writeFile(this.path, JSON.stringify(fileParsed,null,'\t'));
-        }catch (err){
-            console.log(`{ error: ${err} }`);
-        }
-    }
-
-    static async delete(id){
-        try{
-            let file = await fs.promises.readFile(this.path, 'utf-8',);
-            let fileParsed = JSON.parse(file);
-            fileParsed = fileParsed.filter(product => product.id !== id);
-            console.log(fileParsed);
-            await fs.promises.writeFile(this.path, JSON.stringify(fileParsed,null,'\t'));
-        }catch (err){
-            console.log(`{ error: ${err} }`);
-        }
-    }
-
-    static async deleteAll(){
-        try{
-            await fs.promises.unlink(this.path);
+            await fs.promises.unlink(path);
         } catch (err) {
             console.log(`{ error: ${err} }`);
         }

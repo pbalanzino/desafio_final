@@ -1,13 +1,13 @@
 export default class Cart{
     constructor(data){
+        //falta id
         this.timestamp = Date.now();
-        this.products = data.products;
         this.products = [{
             id: product.id,
             quantity: product.quantity
         }];
     }
-    newCart(){
+    post(){
         this.cart = [];
         return {
             id: this.cart.length + 1,

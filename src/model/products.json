@@ -1,22 +1,32 @@
 [
-{
-    "id": 0,
-    "timestamp": "2022-04-08T00:00:00.000",
-    "title": "Escuadra",
-    "description": "Escuadra",
-    "code": "escuadra000",
-    "image": "https://www.misterguau.com/tienda/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/e/s/escuadra_1.jpg",
-    "price": "100.00",
-    "stocked": 100
-},
-{
-    "id": 1,
-    "timestamp": "2022-04-08T00:00:00.100",
-    "title": "Globo Terraqueo",
-    "description": "Globo Terraqueo",
-    "code": "000",
-    "image": "https://www.misterguau.com/tienda/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/e/s/escuadra_1.jpg",
-    "price": "100.00",
-    "stocked": 100
-}
+    {
+        "id":0,
+        "timestamp":1649872419410,
+        "title":"product0",
+        "description":"product0",
+        "code":"product0",
+        "thumbnail":"product0",
+        "price":"product0",
+        "stock":"product0"
+    },
+    {
+        "id":1,
+        "timestamp":1649872419410,
+        "title":"product1",
+        "description":"product1",
+        "code":"product1",
+        "thumbnail":"product1",
+        "price":"product1",
+        "stock":"product1"
+    },
+    {
+        "id":2,
+        "timestamp":1649872419410,
+        "title":"product2",
+        "description":"product2",
+        "code":"product2",
+        "thumbnail":"product2",
+        "price":"product2",
+        "stock":"product2"
+    }
 ]

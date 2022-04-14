@@ -4,6 +4,8 @@ const router = express.Router();
 let products = [{id: 0, title: "product1"}, {id: 1, title:"product2"}, {id:2,title:"product3"}];
 let admin = true;
 
+//limpiar router => pasar logica a controller
+
 router.get('/:pid?', (req, res) => {
     let pid = req.params.pid;
     pid
