@@ -1,7 +1,7 @@
 function* idGenerator() {
-  let id = 0;
+  let count = 0;
   while (true) {
-    yield id++;
+    yield count++;
   }
 }
 

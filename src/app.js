@@ -14,4 +14,4 @@ app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
   .use('/api/products', productsRouter)
-  .use('/api/carts', cartsRouter);
+  .use('/api/carts', cartsRouter)

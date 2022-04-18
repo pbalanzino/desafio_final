@@ -1,34 +1,14 @@
 import express from 'express';
+import Products from '../controller/products.controller.js';
+import verifyAuth from '../auth/auth.js';
+
 const router = express.Router();
-
-let products = [{id: 0, title: "product1"}, {id: 1, title:"product2"}, {id:2,title:"product3"}];
-let admin = true;
-
-//limpiar router => pasar logica a controller
-
-router.get('/:pid?', (req, res) => {
-    let pid = req.params.pid;
-    pid
-    ? res.send(products[pid]) 
-    : res.send(products.map(product => product.title));
-});
-router.post('/', (req, res) => {
-    let product = req.body;
-    admin == true 
-    ? products.push(product)
-    : res.send({ error: -1, message: `ruta ${pid} metodo ${pid} no autorizada` });
-});
-router.put('/:pid', (req, res) => {
-    let pid = req.params.pid;
-    admin == true 
-    ? products.splice(pid, 1, req.body)
-    : res.send({ error: -1, message: `ruta ${pid} metodo ${pid} no autorizada` });
-});
-router.delete('/:pid', (req, res) => {
-    let pid = req.params.pid;
-    admin == true 
-    ? products.pop(pid)
-    : res.send({ error: -1, message: `ruta ${pid} metodo ${pid} no autorizada` });
-});
+//use middleware to verify token
+router.use(verifyAuth);
+router.use(express.json());
+router.get('/:pid?', Products.show);
+router.post('/', verifyAuth, Products.add);
+router.put('/:pid', verifyAuth, Products.update);
+router.delete('/:pid', verifyAuth, Products.delete);
 
 export default router;

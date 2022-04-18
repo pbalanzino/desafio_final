@@ -1,0 +1,3 @@
+Authorization
+Type => API Key
+token: admin123

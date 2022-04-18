@@ -1,11 +1,7 @@
 import fs from 'fs';
-import Product from '../classes/product.class.js';
-import Cart from '../classes/cart.class.js';
 
 export default class Manager{
-    
-    static pathCart = './src/model/carts.json';
-    
+  
     static async read(path){
         try {
             let file = await fs.promises.readFile(path, 'utf-8');

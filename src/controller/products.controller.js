@@ -1,13 +1,12 @@
-import generator from '../tools/generator.js';
+import __dirname from '../utils.js';
 import Manager from '../tools/manager.js';
-
 export default class Products {
     
-    static pathProducts = `../model/products.json`;
+    static pathProducts = `${__dirname}/model/products.json`;
     static productsArray = Manager.read(Products.pathProducts);
     
     constructor(title, description, code, thumbnail, price, stock){
-        this.id = generator().next().value;
+        this.id = productsArray.length + 1;
         this.timestamp = Date.now();
         this.title = title;
         this.description = description;
@@ -17,67 +16,64 @@ export default class Products {
         this.stock = stock;
     }
     
-    static async getAll(){
-        try{
-            return await Products.productsArray;
-        }catch (err){
-            console.error(` { error: ${err} }`);
-        }
-    }
-    
-    static async showOnly(id){
-        try {
-            let productsArray = Products.productsArray;
-            if (id <= productsArray.length) {
-                productsArray.filter(product => {
-                    if(product.id !== id) product;
-                    console.log(product);
-                    return product
-                })
-            } 
-        } catch (err) {
-            console.error(` { error: ${err} }`);
-        }
-    }
-
-    static async add(product){
+    static show = async (req, res) => {
         try{
             let productsArray = await Products.productsArray;
-            const newProductsArray = productsArray.push(product)
-            console.log(newProductsArray);
-            return newProductsArray;
+            if(Number(req.query.pid)){
+                let productId = productsArray.find(product => product.id == req.query.pid);
+                res.send(productId);
+            } else {
+                res.send(productsArray);
+            }
+        } catch(err) {
+            console.error(` { error: ${err} } `);
+        }
+    }
+    // add product from req.body
+    static add = async(req, res) => {
+        try{
+            let productsArray = await Products.productsArray;
+            let product = new Products(
+                req.body.title, 
+                req.body.description, 
+                req.body.code, 
+                req.body.thumbnail, 
+                req.body.price, 
+                req.body.stock
+            );
+            productsArray.push(product);
+            await Manager.write(Products.pathProducts, productsArray);
+            res.send(product);
         } catch (err) {
             console.error(` { error: ${err} }`);
         }
     }
 
-    static async save(product){
+    static update = (req,res) => {
         try{
-            Manager.save(Manager.pathProduct, product);
-        }catch (err){
-            console.error(` { error: ${err} } `)
-        }
-    }
-
-    static async update(id, product){
-        try{
-            let productsArray = await Manager.read(Manager.pathProduct);
-            let productId = productsArray[id];
-            let updatedProduct = (product.title, product.description, product.code, product.thumbnail, product.price, product.stock);
-            productId.push(updatedProduct);
-            await Manager.save(productId, Manager.pathProduct);
+            let products = Products.productsArray;
+            let productId = products.find(product => product.id == req.params.pid);
+            productId.title = req.body.title;
+            productId.description = req.body.description;
+            productId.code = req.body.code;
+            productId.thumbnail = req.body.thumbnail;
+            productId.price = req.body.price;
+            productId.stock = req.body.stock;
+            Manager.save(Products.pathProducts, products);
+            res.send(products);
         }catch (err){
             console.log(` { error: ${err} } `);
         }
     }
     
-    static async delete(id){
+    static delete = (req,res) => {
         try{
-            Manager.delete(id);
+            let productsArray = Products.productsArray;
+            productsArray.splice(req.params.pid, 1);
+            Manager.save(Products.pathProducts, productsArray);
+            res.send(productsArray);
         }catch (err){
             console.error(` { error: ${err} } `);
         }
     }
 };
-
-Products.getAll()
