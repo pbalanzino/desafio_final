@@ -1,8 +1,8 @@
 function* idGenerator() {
-  let count = 0;
+  let count = 0
   while (true) {
-    yield count++;
+    yield count++
   }
 }
 
-export default idGenerator;
+export default idGenerator

@@ -1,62 +1,62 @@
 [
   {
     "id": 0,
-    "timestamp":1650269005,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269005,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   },
   {
     "id": 1,
-    "timestamp":1650269106,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269106,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   },
   {
     "id": 2,
-    "timestamp":1650269115,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269115,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   },
   {
     "id": 3,
-    "timestamp":1650269156,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269156,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   },
   {
     "id": 4,
-    "timestamp":1650269186,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269186,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   },
   {
     "id": 5,
-    "timestamp":1650269199,
-    "title":"productoRandom",
-    "description":"productoRandom",
-    "code":"r4nD0m",
-    "thumbnail":"www.random.com",
-    "price":1000,
-    "stock":80
+    "timestamp": 1650269199,
+    "title": "productoRandom",
+    "description": "productoRandom",
+    "code": "r4nD0m",
+    "thumbnail": "www.random.com",
+    "price": 1000,
+    "stock": 80
   }
 ]

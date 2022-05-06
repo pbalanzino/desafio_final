@@ -1,0 +1,26 @@
+GET http://localhost:8080/
+
+####
+
+// all products
+GET http://localhost:8080/api/products/
+
+###
+
+//  '/:pid?'
+GET http://localhost:8080/api/products/1
+
+###
+
+// add new product
+POST http://localhost:8080/api/products/
+
+###
+
+// '/:pid' update product
+PUT http://localhost:8080/api/products/1
+
+###
+
+// '/:pid' delete product
+DELETE http://localhost:8080/api/products/1

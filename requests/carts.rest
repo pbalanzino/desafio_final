@@ -1,0 +1,22 @@
+// Create new cart and return the id
+POST http://localhost:8080/api/carts/
+
+###
+
+// '/:cid' Clean and Delete selected cart
+DELETE http://localhost:8080/api/carts/
+
+###
+
+// '/:cid/products' List all products in the cart
+GET http://localhost:8080/api/carts/1/products
+
+###
+
+// '/:cid/products/:pid' Add product to the cart
+POST http://localhost:8080/api/carts/1/products/
+
+###
+
+// '/:cid/products/:pid' Remove product from the cart
+DELETE http://localhost:8080/api/carts/1/products/
