@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export default class Manager {
+export class Manager {
   static async read(path) {
     try {
       let file = await fs.promises.readFile(path, 'utf-8')

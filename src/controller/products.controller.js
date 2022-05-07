@@ -1,11 +1,12 @@
 import __dirname from '../utils.js'
-import Manager from '../tools/manager.js'
-export default class Products {
+import { Manager } from '../tools/manager.js'
+
+const { read, save } = Manager
+
+export class Products {
   static pathProducts = `${__dirname}/model/products.json`
-  static productsArray = Manager.read(Products.pathProducts)
 
   constructor(title, description, code, thumbnail, price, stock) {
-    this.id = productsArray.length + 1
     this.timestamp = Date.now()
     this.title = title
     this.description = description
@@ -15,45 +16,42 @@ export default class Products {
     this.stock = stock
   }
 
-  static show = async (req, res) => {
+  static show = async (req, res, next) => {
     try {
-      let productsArray = await Products.productsArray
-      if (Number(req.query.pid)) {
-        let productId = productsArray.find(
-          (product) => product.id == req.query.pid,
-        )
-        res.send(productId)
-      } else {
-        res.send(productsArray)
-      }
-    } catch (err) {
-      console.log(err)
-      console.error(` { error: ${err} } `)
+      let productsArray = await read(Products.pathProducts)
+      if (Number(req.query.pid) >= productsArray.length)
+        res.send(`Product with this id: ${req.query.pid} does not exist.`)
+      Number(req.query.pid)
+        ? res.status(200).json(productsArray[req.query.pid])
+        : res.send(productsArray)
+    } catch (error) {
+      return next(error)
     }
   }
 
-  static add = async (req, res) => {
+  static add = async (req, res, next) => {
     try {
-      let productsArray = await Products.productsArray
-      let product = new Products(
+      let products = await read(Products.pathProducts)
+      let newProduct = new Products(
         req.body.title,
         req.body.description,
         req.body.code,
         req.body.thumbnail,
         req.body.price,
-        req.body.stock,
+        req.body.stock
       )
-      productsArray.push(product)
-      await Manager.write(Products.pathProducts, productsArray)
-      res.send(product)
-    } catch (err) {
-      console.error(` { error: ${err} }`)
+      products.push(newProduct)
+      save(Products.pathProducts, products)
+      res.send(newProduct)
+    } catch (error) {
+      error.status = 500
+      next(error)
     }
   }
 
-  static update = (req, res) => {
+  static update = async (req, res, next) => {
     try {
-      let products = Products.productsArray
+      let products = await read(Products.pathProducts)
       let productId = products.find((product) => product.id == req.params.pid)
       productId.title = req.body.title
       productId.description = req.body.description
@@ -61,21 +59,28 @@ export default class Products {
       productId.thumbnail = req.body.thumbnail
       productId.price = req.body.price
       productId.stock = req.body.stock
-      Manager.save(Products.pathProducts, products)
+      save(Products.pathProducts, products)
       res.send(products)
-    } catch (err) {
-      console.log(` { error: ${err} } `)
+    } catch (error) {
+      next(error)
     }
   }
 
-  static delete = (req, res) => {
+  static clean = async (req, res, next) => {
     try {
-      let productsArray = Products.productsArray
-      productsArray.splice(req.params.pid, 1)
-      Manager.save(Products.pathProducts, productsArray)
-      res.send(productsArray)
-    } catch (err) {
-      console.error(` { error: ${err} } `)
+      const productID = Number(req.params.pid)
+      let productsArray = await read(Products.pathProducts)
+      let products = productsArray
+      if (~productID) {
+        productsArray.splice(req.params.pid, 1)
+        save(Products.pathProducts, products)
+        res.send(products)
+      } else {
+        throw new Error('Product not found')
+        error.status = 404
+      }
+    } catch (error) {
+      return next(error)
     }
   }
 }

@@ -1,15 +1,15 @@
 import express from 'express'
-import Products from '../controller/products.controller.js'
-import verifyAuth from '../auth/auth.js'
+import { Products } from '../controller/products.controller.js'
+import { verifyToken } from '../middlewares/authJWT.js'
 
 const router = express.Router()
-
+const { show, add, update, clean } = Products
 // router.use(verifyAuth)
 router.use(express.json())
 
-router.get('/:pid?', Products.show)
-router.post('/', verifyAuth, Products.add)
-router.put('/:pid', verifyAuth, Products.update)
-router.delete('/:pid', verifyAuth, Products.delete)
+router.get('/:pid?', show)
+router.post('/', verifyToken, add)
+router.put('/:pid', verifyToken, update)
+router.delete('/:pid', verifyToken, clean)
 
 export default router

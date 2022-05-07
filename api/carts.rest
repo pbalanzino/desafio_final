@@ -1,6 +1,11 @@
 // Create new cart and return the id
 POST http://localhost:8080/api/carts/
 
+Content-Type: application/json
+{
+    "customerId": 1
+}
+
 ###
 
 // '/:cid' Clean and Delete selected cart
