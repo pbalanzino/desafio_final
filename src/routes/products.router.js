@@ -1,6 +1,6 @@
 import express from 'express'
 import { Products } from '../controller/products.controller.js'
-import { verifyToken } from '../middlewares/authJWT.js'
+import { verifyToken } from '../middleware/authJWT.js'
 
 const router = express.Router()
 const { show, add, update, clean } = Products
