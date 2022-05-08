@@ -1,25 +1,27 @@
-import { promises as fs } from "fs";
-
-class ContainerFiles {
-  constructor(path) {
-    this.path = path;
-  }
-  async list(id) {
+import fs from 'fs'
+export class FileContainer {
+  static async read(path) {
     try {
-      const list = await this.listAll();
-      const search = list.find((obj) => obj.id === id);
-      return search;
-    } catch (error) {
-      throw error;
+      let file = await fs.promises.readFile(path, 'utf-8')
+      return JSON.parse(file)
+    } catch (err) {
+      console.log(`{ error: ${err} }`)
     }
   }
 
-  async listAll() {
+  static async save(path, element) {
     try {
-      const data = await fs.readFile(this.path, "utf8");
-      return JSON.parse(data);
-    } catch (error) {
-      return [];
+      await fs.promises.writeFile(path, JSON.stringify(element), null, '\t')
+    } catch (err) {
+      console.log(`{ error: ${err} }`)
+    }
+  }
+
+  static async deleteAll(path) {
+    try {
+      await fs.promises.unlink(path)
+    } catch (err) {
+      console.log(`{ error: ${err} }`)
     }
   }
 }
