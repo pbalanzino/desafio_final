@@ -1,6 +1,6 @@
 import FileContainer from '../../file.container.js'
 
-class FileDAO extends FileContainer {
+export class FileDAO extends FileContainer {
   constructor() {
     super('model/products.json')
   }
@@ -8,5 +8,3 @@ class FileDAO extends FileContainer {
     await this.close()
   }
 }
-
-export default FileDAO

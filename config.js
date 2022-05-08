@@ -1,6 +1,5 @@
 export const config = [
   {
-    port: 8080,
     database: {
       engine: 'file',
       path: 'model/products.json'

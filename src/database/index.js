@@ -1,5 +1,4 @@
 import config from '../../config.js'
-import FileContainer from '../../file.container.js'
 
 let client
 ;(async () => {
@@ -26,3 +25,5 @@ let client
       console.log('MongoDB connected')
   }
 })()
+
+export default client
