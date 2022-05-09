@@ -1,4 +1,3 @@
-// export __dirname
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 
