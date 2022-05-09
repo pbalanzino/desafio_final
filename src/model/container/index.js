@@ -1,4 +1,4 @@
-import { config } from '../../config.js'
+import { config } from '../../../config.js'
 
 let container
 
@@ -16,7 +16,7 @@ switch (config.database.engine) {
     container = import('./firebase.container.js')
     break
   case 'sqlite3':
-    container = import('./sqlite3.container.js')
+    container = import('./sqlite3.container.js.js')
     break
   default:
     container = import('./mongoDB.container.js')

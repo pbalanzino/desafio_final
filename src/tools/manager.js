@@ -18,6 +18,14 @@ export class Manager {
     }
   }
 
+  static async _delete(path) {
+    try {
+      await fs.promises.unlink(path)
+    } catch (err) {
+      console.log(`{ error: ${err} }`)
+    }
+  }
+
   static async deleteAll(path) {
     try {
       await fs.promises.unlink(path)

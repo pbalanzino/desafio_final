@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import * as model from './model/products.schema.js'
-import config from '../../config.js'
+import * as model from './model/products.schema.js.js'
+import config from '../../../config.js'
 const database = cliente.db(config.database.name)
 
 export class MongoDBContainer {
