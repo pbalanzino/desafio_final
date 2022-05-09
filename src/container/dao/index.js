@@ -1,20 +1,33 @@
 import { config } from '../../../config.js'
 
-let daoProductos
-let daoCarritos
+let productsDAO
+let cartDAO
 
 switch (config.database.engine) {
+  case 'memory':
+    productsDAO = import('./products/memory.productsDAO.js')
+    cartDAO = import('./products/memory.cartDAO.js')
+    break
+  case 'file':
+    productsDAO = import('./products/file.productsDAO.js')
+    cartDAO = import('./products/file.cartDAO.js')
+    break
   case 'mongodb':
-    daoProductos = import('./products/mongoDB.products.js')
+    productsDAO = import('./products/mongoDB.productsDAO.js')
+    cartDAO = import('./products/mongoDB.cartDAO.js')
     break
   case 'firebase':
-    daoProductos = import('./products/firebase.products.js')
+    productsDAO = import('./products/firebase.productsDAO.js')
+    cartDAO = import('./products/firebase.cartDAO.js')
+
     break
   case 'sqlite3':
-    daoProductos = import('./products/sqlite3.products.js')
+    productsDAO = import('./products/sqlite3.productsDAO.js')
+    cartDAO = import('./products/sqlite3.cartDAO.js')
     break
   default:
-    daoProductos = import('./productos/mongoDB.products.js')
+    productsDAO = import('./productos/mongoDB.productsDAO.js')
+    cartDAO = import('./productos/mongoDB.cartDAO.js')
 }
 
-export { daoProductos, daoCarritos }
+export { productsDAO, cartDAO }
