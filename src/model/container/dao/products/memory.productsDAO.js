@@ -2,9 +2,9 @@ import { MemoryContainer } from '../../memory.container.js'
 
 export class MemoryDAO extends MemoryContainer {
   constructor() {
-    super('model/memory.model.js')
+    super()
   }
-  async disconnect() {
+  disconnect() {
     console.log('Finalizing operations...')
   }
 }
