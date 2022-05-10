@@ -1,8 +1,8 @@
-import mongoose from 'mongoose'
-import * as model from './model/products.schema.js.js'
+import * as model from './model/products.schema.js'
 import config from '../../../config.js'
 const database = cliente.db(config.database.name)
 
+let { productCollection, productsSchema } = model
 export class MongoDBContainer {
   constructor(collection) {
     this.collection = database.collection(collection)
@@ -23,5 +23,3 @@ export class MongoDBContainer {
     await this.model.deleteMany({})
   }
 }
-
-export default MongoDBContainer

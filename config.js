@@ -1,27 +1,21 @@
-export const config = [
-  {
-    database: {
+export const config = {
+  database: [
+    {
       engine: 'file',
-      path: 'model/products.json'
-    }
-  },
-  {
-    database: {
+      uri: 'model/products.json'
+    },
+    {
       engine: 'mongoDB',
-      url: 'mongodb://localhost:27017/ecommerce',
+      uri: 'mongodb://localhost:27017/ecommerce',
       name: 'ecommerce'
-    }
-  },
-  {
-    database: {
+    },
+    {
       engine: 'firebase',
-      url: 'https://ecommerce-fb.firebaseio.com/'
-    }
-  },
-  {
-    database: {
+      uri: 'https://ecommerce-fb.firebaseio.com/'
+    },
+    {
       engine: 'sqlite3',
-      path: 'model/products.sqlite'
+      uri: 'model/products.sqlite'
     }
-  }
-]
+  ]
+}

@@ -16,10 +16,12 @@ switch (config.database.engine) {
     container = import('./firebase.container.js')
     break
   case 'sqlite3':
-    container = import('./sqlite3.container.js.js')
+    container = import('./sqlite3.container.js')
     break
   default:
     container = import('./mongoDB.container.js')
 }
 
 export { container }
+
+console.log(config.database.engine)
