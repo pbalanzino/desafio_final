@@ -6,7 +6,8 @@ const { read, save } = Manager
 export class Products {
   static pathProducts = `${__dirname}/model/products.json`
 
-  constructor(title, description, code, thumbnail, price, stock) {
+  constructor(id, title, description, code, thumbnail, price, stock) {
+    this.id = id
     this.timestamp = Date.now()
     this.title = title
     this.description = description

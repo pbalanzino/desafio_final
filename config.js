@@ -1,5 +1,5 @@
 export const config = {
-  database: [
+  client: [
     {
       engine: 'file',
       uri: 'model/products.json'
@@ -18,4 +18,20 @@ export const config = {
       uri: 'model/products.sqlite'
     }
   ]
+}
+
+const sqlite3 = {
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: 'model/products.sqlite3'
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: 'migrations'
+    },
+    seeds: {
+      directory: 'seeds'
+    }
+  }
 }

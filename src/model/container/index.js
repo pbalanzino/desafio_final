@@ -23,5 +23,3 @@ switch (config.database.engine) {
 }
 
 export { container }
-
-console.log(config.database.engine)
