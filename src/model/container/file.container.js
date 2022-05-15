@@ -35,7 +35,6 @@ export class FileContainer {
         price: newProduct.price,
         stock: newProduct.stock
       })
-
       // await save(this.path, JSON.stringify(data), null, '\t')
     } catch (error) {
       console.log(error)
