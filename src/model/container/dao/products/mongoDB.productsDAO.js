@@ -1,12 +1,10 @@
-import MongoDBContainer from '../../mongoDB.container.js'
-
-class MongoDBDAO extends MongoDBContainer {
+import { MongoDBContainer } from '../../mongoDB.container.js'
+import { config } from '../../../../../config.js'
+export class MongoDBDAO extends MongoDBContainer {
   constructor() {
-    super('')
+    super(config.db.collection)
   }
   async disconnect() {
     await this.close()
   }
 }
-
-export default MongoDBDAO

@@ -1,23 +1,23 @@
-import * as model from './model/products.schema.js'
-import config from '../../../config.js'
+// import * as model from './model/products.schema.js'
+import { config } from '../../../config.js'
 
-let { productCollection, productsSchema } = model
+// let { productCollection, productsSchema } = model
 export class MongoDBContainer {
   constructor(collection) {
     this.collection = collection
   }
   // MongoDB CRUD
-  async create(data) {
-    return await this.collection.products.insertOne(data)
+  static async create(data) {
+    return await this.collection.insertOne(data)
   }
-  async read(query) {
-    return await this.collection.products.find(query).toArray()
+  static async read(query) {
+    return await MongoDBContainer.collection.find(query).toArray()
   }
-  async update(query, data) {
-    return await this.collection.products.updateOne(query, data)
+  static async update(query, data) {
+    return await this.collection.updateOne(query, data)
   }
   async delete(query) {
-    return await this.collection.products.deleteOne(query)
+    return await this.collection.deleteOne(query)
   }
 
   // static create = async (element) => {
