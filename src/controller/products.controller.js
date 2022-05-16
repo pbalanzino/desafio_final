@@ -1,5 +1,7 @@
 import __dirname from '../utils.js'
 import { Manager } from '../tools/manager.js'
+import { MongoDAO } from '../model/container/dao/products/mongoDB.productsDAO.js'
+import mongoose from 'mongoose'
 
 const { read, save } = Manager
 

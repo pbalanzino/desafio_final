@@ -1,25 +1,38 @@
 import * as model from './model/products.schema.js'
 import config from '../../../config.js'
-const database = cliente.db(config.database.name)
 
 let { productCollection, productsSchema } = model
 export class MongoDBContainer {
   constructor(collection) {
-    this.collection = database.collection(collection)
+    this.collection = collection
   }
-  static create = async (element) => {
-    await this.model.create(element)
+  // MongoDB CRUD
+  async create(data) {
+    return await this.collection.products.insertOne(data)
   }
-  static read = async () => {
-    return await this.model.find()
+  async read(query) {
+    return await this.collection.products.find(query).toArray()
   }
-  static update = async (id, element) => {
-    await this.model.findByIdAndUpdate(id, element)
+  async update(query, data) {
+    return await this.collection.products.updateOne(query, data)
   }
-  static delete = async (id) => {
-    await this.model.findByIdAndDelete(id)
+  async delete(query) {
+    return await this.collection.products.deleteOne(query)
   }
-  static deleteAll = async () => {
-    await this.model.deleteMany({})
-  }
+
+  // static create = async (element) => {
+  //   await this.model.create(element)
+  // }
+  // static read = async () => {
+  //   return await this.model.find()
+  // }
+  // static update = async (id, element) => {
+  //   await this.model.findByIdAndUpdate(id, element)
+  // }
+  // static delete = async (id) => {
+  //   await this.model.findByIdAndDelete(id)
+  // }
+  // static deleteAll = async () => {
+  //   await this.model.deleteMany({})
+  // }
 }
