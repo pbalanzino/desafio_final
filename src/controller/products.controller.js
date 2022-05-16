@@ -1,7 +1,6 @@
 import __dirname from '../utils.js'
 import { Manager } from '../tools/manager.js'
 import { MongoDAO } from '../model/container/dao/products/mongoDB.productsDAO.js'
-import mongoose from 'mongoose'
 
 const { read, save } = Manager
 
@@ -21,7 +20,8 @@ export class Products {
 
   static show = async (req, res, next) => {
     try {
-      let productsArray = await read(Products.pathProducts)
+      // let productsArray = await read(Products.pathProducts)
+      let productsArray = await MongoDAO.read({})
       if (Number(req.query.pid) >= productsArray.length)
         res.send(`Product with this id: ${req.query.pid} does not exist.`)
       Number(req.query.pid)
@@ -34,7 +34,8 @@ export class Products {
 
   static add = async (req, res, next) => {
     try {
-      let products = await read(Products.pathProducts)
+      // let products = await read(Products.pathProducts)
+      let products = await MongoDAO.read({})
       let newProduct = new Products(
         req.body.title,
         req.body.description,
@@ -44,7 +45,8 @@ export class Products {
         req.body.stock
       )
       products.push(newProduct)
-      save(Products.pathProducts, products)
+      // save(Products.pathProducts, products)
+      await MongoDAO.create(newProduct)
       res.send(newProduct)
     } catch (error) {
       error.status = 500
@@ -54,7 +56,8 @@ export class Products {
 
   static update = async (req, res, next) => {
     try {
-      let products = await read(Products.pathProducts)
+      // let products = await read(Products.pathProducts)
+      let products = await MongoDAO.read({})
       let productId = products.find((product) => product.id == req.params.pid)
       productId.title = req.body.title
       productId.description = req.body.description
@@ -62,7 +65,8 @@ export class Products {
       productId.thumbnail = req.body.thumbnail
       productId.price = req.body.price
       productId.stock = req.body.stock
-      save(Products.pathProducts, products)
+      // save(Products.pathProducts, products)
+      await MongoDAO.update({ id: req.params.pid }, productId)
       res.send(products)
     } catch (error) {
       next(error)
@@ -72,11 +76,13 @@ export class Products {
   static clean = async (req, res, next) => {
     try {
       const productID = Number(req.params.pid)
-      let productsArray = await read(Products.pathProducts)
+      // let productsArray = await read(Products.pathProducts)
+      let productsArray = await MongoDAO.read({})
       let products = productsArray
       if (~productID) {
         productsArray.splice(req.params.pid, 1)
-        save(Products.pathProducts, products)
+        await MongoDAO.delete({ id: req.params.pid })
+        // save(Products.pathProducts, products)
         res.send(products)
       } else {
         throw new Error('Product not found')
