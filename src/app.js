@@ -4,7 +4,7 @@ import cartsRouter from './routes/carts.router.js'
 import productsRouter from './routes/products.router.js'
 import userRouter from './routes/user.router.js'
 import 'dotenv/config'
-
+import { MongoClient } from './controller/database/mongoDB.client.js'
 const app = express()
 const PORT = process.env.PORT || 8080
 
@@ -21,7 +21,8 @@ app
       error: error.message
     })
   })
-
+const connection = new MongoClient()
+connection.connect()
 const server = app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}/api/products/`)
 })

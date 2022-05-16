@@ -5,20 +5,20 @@ import { DbClient } from './db.client.js'
 export class MongoClient extends DbClient {
   constructor() {
     super()
-    this.connected = False
+    this.connected = false
     this.client = mongoose
   }
   async connect() {
     try {
-      await this.client.connected(config.db.cnxStr, config.db.name, {
-        userNewUrlParser: true,
+      this.client.connect(config.db.cnxStr, {
         useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true
+        maxPoolSize: 50,
+        wtimeoutMS: 2500,
+        useNewUrlParser: true
       })
       console.log('Database connected!')
     } catch (error) {
-      throw new CustomError(500, 'Database connection error', error)
+      console.log(error)
     }
   }
   async disconnect() {
@@ -27,7 +27,7 @@ export class MongoClient extends DbClient {
       console.log('Database disconnected!')
       this.connected = false
     } catch (error) {
-      throw new CustomError(500, 'Database disconnection error', error)
+      console.log(error)
     }
   }
 }

@@ -14,17 +14,17 @@ export class Connection {
       case 'mongoDB':
         client = await import('./mongoDB.client.js')
         await client.connect(config.database.uri)
-        console.log('MongoDB connected 😎')
+        console.log('✔ MongoDB connected!!')
         break
       case 'firebase':
         client = await import('./firebase.client.js')
         await initializeApp(config.database.uri)
-        console.log('Firebase connected 😎')
+        console.log('✔ Firebase connected!!')
         break
       case 'sqlite3':
         client = await import('./sqlite3.client.js')
         await client.connect(config.database.uri)
-        console.log('SQLite3 connected 😎')
+        console.log('✔ SQLite3 connected!!')
         break
       default:
         client = await import('file')
